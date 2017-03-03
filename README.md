@@ -1,5 +1,5 @@
-# CODE1161 - [your name here]
+# CODE1161 - Guy Segev
 
 You can see lots of other course related stuff [here](https://notionparallax.co.uk/CODE1161).
 
-![a photo of me](mugshot.png)
+![a photo of me](guy photo.png)
