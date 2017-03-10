@@ -9,7 +9,7 @@ def is_odd(a_number):
 
     Look into modulo division using the '%' operator as one way of doing this.
     """
-    pass
+    return a_number % 2
 
 
 def fix_it(moves=True, should_move=True):
@@ -23,7 +23,16 @@ def fix_it(moves=True, should_move=True):
     "Duct Tape"
     "No Problem"
     """
-    pass
+    if (moves):
+        if (should_move):
+            return "No Problem"
+        else:
+            return "Duct Tape"
+    else:
+        if (should_move):
+            return "WD-40"
+        else:
+            return "No Problem"
 
 
 def loops_1a():
@@ -33,7 +42,10 @@ def loops_1a():
     return a list of 10 items, each one a string with exacly one star in it.
     E.g.: ['*', '*', '*', '*', '*', '*', '*', '*', '*', '*']
     """
-    pass
+    arr = []
+    for i in range(10):
+        arr.append('*')
+    return arr
 
 
 def star_map():
@@ -44,7 +56,13 @@ def star_map():
     if it's even. Reuse the is odd function that you've already written.
     E.g.: ["!", "*", "!", "*", "!", "*", "!", "*", "!", "*"]
     """
-    pass
+    arr = []
+    for i in range(10):
+        if i % 2:
+            arr.append("*")
+        else:
+            arr.append("!")
+    return arr
 
 
 def loops_1c(number_of_items=5, symbol="#"):
@@ -55,7 +73,10 @@ def loops_1c(number_of_items=5, symbol="#"):
     a string with exacly one symbol in it.
     E.g.: ['#', '#', '#', '#', '#']
     """
-    pass
+    arr = []
+    for i in range(number_of_items):
+        arr.append(symbol)
+    return arr
 
 
 def loops_2():
@@ -76,7 +97,13 @@ def loops_2():
             ['*', '*', '*', '*', '*', '*', '*', '*', '*', '*'],
           ]
     """
-    pass
+    arr = []
+    for r in range(10):
+        col = []
+        for c in range(10):
+            col.append('*')
+        arr.append(col)
+    return arr
 
 
 def loops_3():
@@ -100,7 +127,13 @@ def loops_3():
     TIP: notice that this needs to to return strings of numbers,
          so call str(number) to cast.
     """
-    pass
+    arr = []
+    for r in range(10):
+        col = []
+        for c in range(10):
+            col.append(r)
+        arr.append(col)
+    return arr
 
 
 def loops_4():
@@ -118,7 +151,13 @@ def loops_4():
       ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
     ]
     """
-    pass
+    arr = []
+    for r in range(10):
+        col = []
+        for c in range(10):
+            col.append(c)
+        arr.append(col)
+    return arr
 
 
 def loops_5():
@@ -143,7 +182,13 @@ def loops_5():
         "There are {} green bottles".format(8)
     you'll come to see the pros and cons of each over time.
     """
-    pass
+    arr = []
+    for r in range(10):
+        col = []
+        for c in range(10):
+            col.append("(i{}, j{})".format(str(r), str(c)))
+        arr.append(col)
+    return arr
 
 
 def loops_6():
@@ -166,7 +211,15 @@ def loops_6():
     You can use a variable.
     TIP: look out for the starting condition.
     """
-    pass
+    arr = []
+    num_rows = 1
+    for r in range(10):
+        col = []
+        for c in range(num_rows):
+            col.append(c)
+        arr.append(col)
+        num_rows += 1
+    return arr
 
 
 def loops_7():
@@ -190,7 +243,23 @@ def loops_7():
     This is a hard problem. Use lots of experimentation and draw
     lots of diagrams!
     """
-    pass
+    HEIGHT = 5
+    WIDTH = 9
+    arr = []
+    num_blanks = 4
+
+    for i in range(HEIGHT):
+        row = []
+        for i in range(WIDTH):
+            if i < num_blanks:
+                row.append(" ")
+            elif WIDTH - i <= num_blanks:
+                row.append(" ")
+            else:
+                row.append("*")
+        num_blanks -= 1
+        arr.append(row)
+    return arr
 
 
 def lp(some_kind_of_list, exercise_name):
