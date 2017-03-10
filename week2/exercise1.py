@@ -11,6 +11,8 @@ import os
 
 
 def usefulFunction():
+    """Print the current working directory
+    """
     print(os.getcwd())
 
 
