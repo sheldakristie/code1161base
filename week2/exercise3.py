@@ -9,7 +9,11 @@ def is_odd(a_number):
 
     Look into modulo division using the '%' operator as one way of doing this.
     """
-    return a_number % 2
+    if a_number % 2:
+        return True
+
+    else:
+        return False
 
 
 def fix_it(moves=True, should_move=True):
@@ -56,12 +60,15 @@ def star_map():
     if it's even. Reuse the is odd function that you've already written.
     E.g.: ["!", "*", "!", "*", "!", "*", "!", "*", "!", "*"]
     """
-    arr = []
-    for i in range(10):
+
+    def getSymbol(i):
         if i % 2:
-            arr.append("*")
+            return('*')
         else:
-            arr.append("!")
+            return('!')
+
+    arr = map(getSymbol, list(range(10)))
+
     return arr
 
 
@@ -131,7 +138,7 @@ def loops_3():
     for r in range(10):
         col = []
         for c in range(10):
-            col.append(r)
+            col.append(str(r))
         arr.append(col)
     return arr
 
@@ -155,7 +162,7 @@ def loops_4():
     for r in range(10):
         col = []
         for c in range(10):
-            col.append(c)
+            col.append(str(c))
         arr.append(col)
     return arr
 
@@ -185,7 +192,7 @@ def loops_5():
     arr = []
     for r in range(10):
         col = []
-        for c in range(10):
+        for c in range(5):
             col.append("(i{}, j{})".format(str(r), str(c)))
         arr.append(col)
     return arr
@@ -216,7 +223,7 @@ def loops_6():
     for r in range(10):
         col = []
         for c in range(num_rows):
-            col.append(c)
+            col.append(str(c))
         arr.append(col)
         num_rows += 1
     return arr
