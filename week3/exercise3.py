@@ -4,9 +4,7 @@ Steps on the way to making your own guessing game.
 """
 from __future__ import division
 from __future__ import print_function
-from exercise1 import not_number_rejector
-from exercise1 import super_asker
-import random
+from random import randint
 
 
 def advancedGuessingGame():
@@ -28,7 +26,32 @@ def advancedGuessingGame():
     Remember to think modular. Try to keep your functions small and single
     purpose if you can!
     """
-    pass
+    low = getNum("Lower bound? ")
+    high = getNum("Upper bound? ")
+    while (high < low):
+        high = getNum("Upper bound? ")
+
+    num = randint(low, high)
+
+    guess = getBound("what's your guess? ", low, high)
+    while (int(guess) != num):
+        print (guess, ' is wrong! Guess again!')
+        guess = getBound("what's your guess? ", low, high)
+    return "You got it!"
+
+
+def getNum(message):
+    get = raw_input(message)
+    while (type(get) != int):
+        get = raw_input(message)
+    return get
+
+
+def getBound(message, low, high):
+    get = raw_input(message)
+    while (type(get) != int or int(get) < low or int(get) > high):
+        get = raw_input(message)
+    return get
 
 
 if __name__ == "__main__":

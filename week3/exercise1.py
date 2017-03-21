@@ -12,7 +12,13 @@ def loop_ranger(start, stop=None, step=1):
 
     Do this using any method apart from just using range()
     """
-    pass
+    arr = []
+    i = start
+    while (i < stop):
+        arr.append(i)
+        i += step
+
+    return arr
 
 
 def lone_ranger(start, stop, step):
@@ -20,7 +26,13 @@ def lone_ranger(start, stop, step):
 
     Look up the docs for range() and wrap it in a 1:1 way
     """
-    pass
+    arr = []
+    i = start
+    while (i < stop):
+        arr.append(i)
+        i += step
+
+    return arr
 
 
 def two_step_ranger(start, stop):
@@ -29,7 +41,13 @@ def two_step_ranger(start, stop):
     Sometimes you want to hide complexity.
     Make a range function that always has a step size of 2
     """
-    pass
+    arr = []
+    i = start
+    while (i < stop):
+        arr.append(i)
+        i += 2
+
+    return arr
 
 
 def gene_krupa_range(start, stop, even_step, odd_step):
@@ -38,7 +56,16 @@ def gene_krupa_range(start, stop, even_step, odd_step):
     make a list that instead of having evenly spaced steps
     has odd steps be one size and even steps be another.
     """
-    pass
+    arr = []
+    i = start
+    while (i < stop):
+        arr.append(i)
+        i += even_step
+        if (i < stop):
+            arr.append(i)
+            i += odd_step
+
+    return arr
 
 
 def stubborn_asker(low, high):
@@ -47,17 +74,23 @@ def stubborn_asker(low, high):
     Ask for a number, and if the response is outside the bounds keep asking
     until you get a number that you think is OK
     """
-    pass
+    guess = int(raw_input())
+    while (guess > high or guess < low):
+        guess = int(raw_input())
+    return guess
 
 
-def not_number_rejector(message):
+def not_number_rejector(message=''):
     """Ask for a number repeatedly until actually given one.
 
     Ask for a number, and if the response is actually NOT a number (e.g. "cow",
     "six", "8!") then throw it out and ask for an actual number.
     When you do get a number, return it.
     """
-    pass
+    guess = raw_input(message)
+    while (type(guess) != int):
+        guess = raw_input(message)
+    return guess
 
 
 def super_asker(low, high):
@@ -66,7 +99,11 @@ def super_asker(low, high):
     Combine stubborn_asker and not_number_rejector to make a function
     that does it all!
     """
-    pass
+    guess = raw_input()
+    while (type(guess) != int or guess > high or guess < low):
+        guess = raw_input()
+    return guess
+
 
 if __name__ == "__main__":
     # this section does a quick test on your results and prints them nicely.

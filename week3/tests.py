@@ -10,6 +10,9 @@ import math
 import mock
 import os
 import random
+import exercise1
+import exercise3
+import exercise4
 import sys
 sys.path.append(os.path.dirname(__file__)[:-5])
 from codeHelpers import completion_message
