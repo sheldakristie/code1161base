@@ -9,7 +9,6 @@ You've got an hour.
 """
 from __future__ import division
 from __future__ import print_function
-import time
 
 
 def greet(name="Towering Timmy"):
@@ -18,7 +17,7 @@ def greet(name="Towering Timmy"):
     return a string of "Hello" and the name argument.
     E.g. if given as "Towering Timmy" it should return "Hello Towering Timmy"
     """
-    pass
+    return "Hello " + name
 
 
 def three_counter(input_list=[1, 4, 3, 5, 7, 1, 3, 2, 3, 3, 5, 3, 7]):
@@ -27,7 +26,11 @@ def three_counter(input_list=[1, 4, 3, 5, 7, 1, 3, 2, 3, 3, 5, 3, 7]):
     Return an integer.
     TIP: the test will use a different input_list, so don't just return 5
     """
-    pass
+    count = 0
+    for n in input_list:
+        if n == 3:
+            count += 1
+    return count
 
 
 def fizz_buzz():
@@ -45,7 +48,15 @@ def fizz_buzz():
     if it is. E.g. [1, 2, "Fizz", 4, "Buzz", 6, 7, ...]
     """
     fizzBuzzList = []
-    # your code here
+    for i in range(1, 101):
+        if (i % 3 == 0 and i % 5 == 0):
+            fizzBuzzList.append("FizzBuzz")
+        elif (i % 3 == 0):
+            fizzBuzzList.append("Fizz")
+        elif(i % 5 == 0):
+            fizzBuzzList.append("Buzz")
+        else:
+            fizzBuzzList.append(i)
     return fizzBuzzList
 
 
@@ -56,7 +67,12 @@ def put_behind_bars(input_string="very naughty boy"):
     e.g. "very naughty boy" should return "|v|e|r|y| |n|a|u|g|h|t|y| |b|o|y|"
     TIP: make sure that you have a pipe on both ends of the string.
     """
-    pass
+    retstring = "|"
+    for l in input_string:
+        retstring += l
+        retstring += "|"
+
+    return retstring
 
 
 def pet_filter(letter="a"):
@@ -69,7 +85,11 @@ def pet_filter(letter="a"):
             "bali cattle", "gayal", "turkey", "goldfish", "rabbit", "koi",
             "canary", "society finch", "fancy mouse", "siamese fighting fish",
             "fancy rat and lab rat", "mink", "red fox", "hedgehog", "guppy"]
-    pass
+    retList = []
+    for p in pets:
+        if letter in p:
+            retList.append(p)
+    return retList
 
 
 def best_letter_for_pets():
@@ -80,7 +100,14 @@ def best_letter_for_pets():
     """
     import string
     the_alphabet = string.lowercase
-    pass
+    most_occuring = 'a'
+    most_times = 0
+    for l in the_alphabet:
+        num_l = len(pet_filter(l))
+        if num_l > most_times:
+            most_occuring = l
+            most_times = num_l
+    return most_occuring
 
 
 def make_filler_text_dictionary():
@@ -98,7 +125,12 @@ def make_filler_text_dictionary():
     TIP: you'll need the requests library
     """
     import requests
-    pass
+    retDict = {}
+    for i in range(3, 8):
+        url = 'http://www.setgetgo.com/randomword/get.php?len='
+        threewords = [requests.get(url + str(i)).text for _ in range(3)]
+        retDict[i] = threewords
+    return retDict
 
 
 def random_filler_text(number_of_words=200):
@@ -114,7 +146,17 @@ def random_filler_text(number_of_words=200):
            capital letter and end with a full stop.
     """
     import random
-    pass
+    d = make_filler_text_dictionary()
+    paragraph = ""
+    for w in range(number_of_words):
+        threewords = d[random.randint(3, 7)]
+        word = str(threewords[random.randint(0, 2)])
+        paragraph += word
+        if w < number_of_words - 1:
+            paragraph += " "
+
+    paragraph = paragraph[0].upper() + paragraph[1:] + "."
+    return paragraph
 
 
 def fast_filler(number_of_words=200):
@@ -129,7 +171,34 @@ def fast_filler(number_of_words=200):
     into and out of the file. Be careful when you read it back in, it'll
     convert integer keys to strings.
     """
-    pass
+    import os
+    import random
+    import json
+
+    if os.path.isfile('dict_racey.words'):
+        f = open('dict_racey.words', 'r')
+        loadDict = json.load(f)
+        retDict = {}
+        for i in range(3, 8):
+            retDict[i] = loadDict[str(i)]
+
+        d = retDict
+
+    else:
+        d = make_filler_text_dictionary()
+        f = open('dict_racey.words', 'w+')  # make new file
+        json.dump(d, f)  # save dict as json
+
+    paragraph = ""
+    for w in range(number_of_words):
+        threewords = d[random.randint(3, 7)]
+        word = str(threewords[random.randint(0, 2)])
+        paragraph += word
+        if w < number_of_words - 1:
+            paragraph += " "
+
+    paragraph = paragraph[0].upper() + paragraph[1:] + "."
+    return paragraph
 
 
 if __name__ == '__main__':
