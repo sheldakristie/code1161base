@@ -29,10 +29,7 @@ def success_is_relative():
     # that it changes.
     # print(path, CWD)
 
-    os.chdir(os.getcwd()+'/week1')
-    CWD = os.getcwd()
-    print('THE CWD IS', CWD)
-    F = open('pySuccessMessage.json', 'r')
+    F = open(CWD + '/week1' + '/pySuccessMessage.json', 'r')
     message = F.read().strip(' \n\t')
     return message
 
@@ -157,7 +154,7 @@ def diarist():
         if ("M10" in line):
             count += 1
 
-    outputFile = open(LOCAL + "/lasers.pew", "w")
+    outputFile = open(LOCAL + "/lasers.pew", "w+")
     outputFile.write(str(count))
     outputFile.close()
 
