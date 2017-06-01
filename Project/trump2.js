@@ -1,4 +1,4 @@
-// loads trump's tweets and gives the most common words
+// # retweets over date
 var url = "https://raw.githubusercontent.com/atiredturtle/code1161base/master/Project/Donald-Tweets!.csv";
 
 var loaded = false;
@@ -22,7 +22,7 @@ Papa.parse(url, {
 
 function processData(d){
     //console.log(d);
-    for (var i = 0; i < d.length; i++){
+    for (var i = 0; i < 1000/*d.length*/; i++){
     	//console.log("Filtering tweet ("+i+"/"+d.length+")");
         var sentence = d[i].Tweet_Text.split(" ");
         for (var j = 0; j < sentence.length; j++){	
@@ -43,7 +43,6 @@ function processData(d){
 		    }
 		}
     }
-
 }
 
 function reduceDict(d, size){
@@ -59,7 +58,7 @@ function reduceDict(d, size){
 		}
 		min++;
 		currsize = Object.keys(newDict).length;
-		//console.log(currsize + " " + min);
+		console.log(currsize + " " + min);
 	}
 	dict = newDict;
 }
@@ -78,23 +77,18 @@ function getRandomColor(){
 }
 
 function drawChart(dict){
-	// sort dict
-    var sortedKeys = Object.keys(dict).sort(function(a, b) {
-	  return dict[b] - dict[a];
-	});
     var my_keys = [];
     var my_data = [];
     var my_colors = [];
-    for (var i = 0; i < sortedKeys.length ; i++) {
-    	console.log(sortedKeys[i]);
-        my_keys.push(sortedKeys[i]);
-        my_data.push(dict[sortedKeys[i]]);
+    for (var key in dict) {
+        my_keys.push(key);
+        my_data.push(dict[key]);
         my_colors.push(getRandomColor());
     }
 
     var ctx = "myChart";
     var myChart = new Chart(ctx, {
-        type: 'bar',
+        type: 'bubble',
         data: {
             labels: my_keys,
             datasets: [{
