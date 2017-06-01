@@ -24,7 +24,7 @@ function processData(d){
         if (firstLang in dict){
             dict[firstLang]++;
         } else {
-            dict[firstLang] = 0;
+            dict[firstLang] = 1;
         }
     }
     console.log(dict);
