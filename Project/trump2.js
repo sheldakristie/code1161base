@@ -24,24 +24,12 @@ function processData(d){
     //console.log(d);
     for (var i = 0; i < 1000/*d.length*/; i++){
     	//console.log("Filtering tweet ("+i+"/"+d.length+")");
-        var sentence = d[i].Tweet_Text.split(" ");
-        for (var j = 0; j < sentence.length; j++){	
-        	var word = sentence[j];
-        	word = word.replace(/[\.?!\_(),-]/g, '');
-        	word = word.toLowerCase();
-        	if (word.indexOf("https:") !== -1 || // remove links
-        		word.indexOf("@") !== -1) // remove retweets
-        	{ 
-        		word = "";
-        	}
-	        if (word != ""){
-		        if (word in dict){
-		             dict[word]++;
-		        } else {
-		            dict[word] = 1;
-		        }
-		    }
-		}
+
+        if (d[i] in dict){
+             dict[word]++;o
+        } else {
+            dict[word] = 1;
+        }
     }
 }
 
