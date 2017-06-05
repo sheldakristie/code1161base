@@ -1,33 +1,40 @@
-// Create a variable with the url to the csv file
-var url = "https://raw.githubusercontent.com/atiredturtle/code1161base/master/Project/World_Languages.csv";
+function testChart(){
+    // Create a variable with the url to the csv file
+    var url = "https://raw.githubusercontent.com/atiredturtle/code1161base/master/Project/World_Languages.csv";
+    console.log("loading test");
+    var loaded = false;
+    var CSVdata;
+    
+    var ctx = "myChart";
+    console.log(ctx.data);
+    if (ctx.data != undefined) removeData(ctx);
 
-var loaded = false;
-var CSVdata;
-var dict = {};
-
-Papa.parse(url, {
-    download: true,
-    header: true,
-    complete: function(results) {  
-        console.log("YAY");
-        CSVdata = results;
-        processData(CSVdata.data);
-        drawChart(dict);
-    }
-});
+    Papa.parse(url, {
+        download: true,
+        header: true,
+        complete: function(results) {  
+            console.log("YAY");
+            CSVdata = results;
+            var dict = test_processData(CSVdata.data);
+            drawChart(dict);
+        }
+    });
+}
 
 
-function processData(d){
-    //console.log(d);
+function test_processData(d){
+    var newdict = {};
+    console.log(d);
     for (var i = 0; i < d.length; i++){
         var firstLang = d[i].WORLD_LANGUAGES_FIRST;
-        if (firstLang in dict){
-            dict[firstLang]++;
+        if (firstLang in newdict){
+            newdict[firstLang]++;
         } else {
-            dict[firstLang] = 1;
+            newdict[firstLang] = 1;
         }
     }
-    console.log(dict);
+    console.log(newdict);
+    return newdict;
 }
 
 function getRandomInt(min, max) {
