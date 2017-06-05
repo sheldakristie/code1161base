@@ -3,7 +3,8 @@ var url = "https://raw.githubusercontent.com/atiredturtle/code1161base/master/Pr
 var CSVdata;
 var dict = {};
 var NUM_FAVS = 5
-var website_to_draw = "www.facebook.com";
+var website_to_draw = "www.facebook.com"; // default
+var allSites = [];
 
 function drawRegionsMap() {
     // var nameValue = document.getElementById("uniqueID").value;
@@ -57,35 +58,41 @@ Papa.parse(url, {
     }
 });
 
-new autoComplete({
-    selector: 'input[name="websiteSearch"]',
-    minChars: 1,
-    source: function(term, suggest){
-        term = term.toLowerCase();
-        var choices = ['ActionScript', 'AppleScript', 'Asp'];
-        var matches = [];
-        for (i=0; i<choices.length; i++)
-            if (~choices[i].toLowerCase().indexOf(term)) matches.push(choices[i]);
-        suggest(matches);
-    },
-    renderItem: function (item, search){
-        search = search.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
-        var re = new RegExp("(" + search.split(' ').join('|') + ")", "gi");
-        return '<div class="autocomplete-suggestion" data-val="' + item + '">' + item.replace(re, "<b>$1</b>") + '</div>';
+$("#websiteSearch").autocomplete({
+    lookup: allSites,
+    onSelect: function (suggestion) {
+        website_to_draw = $('#websiteSearch').val();
+        drawRegionsMap();
     }
 });
 
 function processData(d){
+    var tempSites = [];
     for (var i = 0; i < d.length; i++){
         var popularWebsites;
         var country = d[i].country;
+        var website = d[i].Website;
         if (country in dict){
-            dict[country].push(d[i].Website);
+            dict[country].push(website);
         } else {
-            dict[country] = []
+            dict[country] = [];
         }
+        tempSites.push(website);
+    }
+
+
+    // make tempSites unique
+    tempSites = tempSites.filter(function(elem, index, self) {
+        return index == self.indexOf(elem);
+    });
+
+    // place websites in allSites list as object
+    for (var i = 0; i < tempSites.length; i++){
+        allSites.push({ value: tempSites[i] });
     }
 }
+ 
+
 
 function generateArray(d, searchSite){
     var arr = [];
@@ -108,7 +115,6 @@ function generateArray(d, searchSite){
 }
 
 $('#websiteSearch').change(function(){
-    console.log("www."+ $('#websiteSearch').val()+".com");
-    website_to_draw = "www."+ $('#websiteSearch').val()+".com";
-    drawRegionsMap()
+    website_to_draw = $('#websiteSearch').val();
+    drawRegionsMap();
 });
