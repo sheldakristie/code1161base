@@ -101,21 +101,31 @@ def wordy_pyramid():
     # get = take something from internet
     # push = give it back to the internet
 
-    import requests
-    baseURL = "http://randomword.setgetgo.com/get.php?len="
-    make_pyramid = []
-    for i in range(3, 21, 2):
-        url = baseURL + str(i)
-        r = requests.get(url)
-        message = r.text
-        make_pyramid.append(message)
-    for i in range(20, 3, -2):
-        url = baseURL + str(i)
-        r = requests.get(url)
-        message = r.text
-        make_pyramid.append(message)
-    # print(make_pyramid)
-    return make_pyramid
+    # import requests
+    # baseURL = "http://randomword.setgetgo.com/get.php?len="
+    # make_pyramid = []
+    # for i in range(3, 21, 2):
+    #     url = baseURL + str(i)
+    #     r = requests.get(url)
+    #     message = r.text
+    #     make_pyramid.append(message)
+    # for i in range(20, 3, -2):
+    #     url = baseURL + str(i)
+    #     r = requests.get(url)
+    #     message = r.text
+    #     make_pyramid.append(message)
+    # # print(make_pyramid)
+    # return make_pyramid
+    pyramid1 = []
+    pyramid2 = []
+    url = "http://www.setgetgo.com/randomword/get.php?len="
+    for length in range(3, 21):
+        if length % 2 == 1:
+            pyramid1.append(requests.get(url+str(length)).text)
+        else:
+            pyramid2 = [requests.get(url+str(length)).text] + pyramid2
+
+    return pyramid1 + pyramid2
 
 
 def wunderground():
